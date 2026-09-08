@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index.html.</title>
+    <title>Controle de Chaves | Claviculário & Formulários</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -33,6 +33,11 @@
                 <span class="text-sm bg-blue-800 px-3 py-1 rounded-full border border-blue-700 ml-2 whitespace-nowrap">EDAG do Brasil</span>
             </div>
         </header>
+
+        <div class="px-6 pt-3 no-print">
+            Acesse também a visualização detalhada: 
+            <a href="chaves-por-andar.html" target="_blank" class="text-blue-700 font-semibold underline">Ver Índice por Andar e Plantas</a>
+        </div>
 
         <!-- Main Content -->
         <main class="flex-1 max-w-7xl w-full mx-auto p-6 space-y-6">
@@ -579,7 +584,6 @@
                         </table>
                     </div>
 
-                    <!-- Rodapé de Conferência e Assinatura no PDF Geral -->
                     <div style="border-top: 2px solid #000; padding-top: 15px; margin-top: 40px; display: flex; justify-content: space-between; align-items: flex-end; font-size: 11px; font-weight: bold;">
                         <div>
                             <span>Data da última conferência geral: ______/______/__________</span>
@@ -776,7 +780,6 @@
             }
         }
 
-        // Gestão de Usuários
         function renderUsersTable() {
             const tbody = document.getElementById('users-table-body');
             tbody.innerHTML = '';
@@ -882,7 +885,6 @@
             }
         }
 
-        // Configuração do Logo
         function openLogoModal() {
             document.getElementById('input-logo-url').value = companyLogoUrl;
             document.getElementById('logo-modal').classList.remove('hidden');
@@ -907,7 +909,6 @@
             loadKeyForm();
         }
 
-        // CRUD Chaves
         function openKeyModal() {
             document.getElementById('key-modal-title').innerText = 'Cadastrar Nova Chave';
             document.getElementById('edit-key-id').value = '';
@@ -960,118 +961,7 @@
             closeKeyModal();
             renderGeralTable();
         }
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controle de Chaves - EDAG</title>
-    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/browser.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        @media print {
-            body * { visibility: hidden; }
-            #printable-form, #printable-form *, #printable-general-pdf, #printable-general-pdf * { visibility: visible; }
-            #printable-form { position: absolute; left: 0; top: 0; width: 100%; box-shadow: none !important; border: none !important; }
-            #printable-general-pdf { position: absolute; left: 0; top: 0; width: 100%; box-shadow: none !important; border: none !important; background: white !important; }
-            .no-print { display: none !important; }
-        }
-    </style>
-</head>
-<body class="bg-gray-100 font-sans text-gray-900">
 
-    <div class="min-h-screen flex flex-col">
-        <!-- Header -->
-        <header class="bg-blue-900 text-white shadow-md py-4 px-6 flex justify-between items-center no-print">
-            <div class="flex items-center space-x-3">
-                <i class="fa-solid fa-key text-2xl text-yellow-400"></i>
-                <h1 class="text-xl font-bold">Controle de Chaves | Claviculário & Plantas</h1>
-            </div>
-            <div class="text-sm">EDAG do Brasil - Facility Management</div>
-        </header>
-
-        <!-- Main Content -->
-        <main class="flex-grow p-6 max-w-7xl mx-auto w-full space-y-6">
-            
-            <!-- Seção de Plantas Baixas -->
-            <section class="bg-white p-6 rounded-lg shadow-md no-print">
-                <h2 class="text-lg font-bold text-gray-800 mb-2 flex items-center space-x-2">
-                    <i class="fa-solid fa-map text-blue-600"></i>
-                    <span>Plantas Baixas e Localização de Portas</span>
-                </h2>
-                <p class="text-sm text-gray-600 mb-4">Selecione o andar para visualizar a planta correspondente com as portas numeradas:</p>
-                
-                <!-- Botões de Navegação dos Andares -->
-                <div class="flex flex-wrap gap-2 mb-4">
-                    <button onclick="mudarPlanta('terreo')" id="btn-terreo" class="px-4 py-2 bg-blue-600 text-white rounded font-medium text-sm transition hover:bg-blue-700">Térreo</button>
-                    <button onclick="mudarPlanta('andar1')" id="btn-andar1" class="px-4 py-2 bg-gray-200 text-gray-700 rounded font-medium text-sm transition hover:bg-gray-300">1º Andar</button>
-                    <button onclick="mudarPlanta('andar2')" id="btn-andar2" class="px-4 py-2 bg-gray-200 text-gray-700 rounded font-medium text-sm transition hover:bg-gray-300">2º Andar</button>
-                </div>
-
-                <!-- Container da Imagem da Planta -->
-                <div class="border rounded-lg p-2 bg-gray-50 flex justify-center items-center overflow-x-auto">
-                    <img id="planta-img" src="img/planta-terreo.png" alt="Planta Baixa" class="max-h-[500px] object-contain rounded border shadow-sm">
-                </div>
-            </section>
-
-            <!-- Seção de Controle de Chaves (Simulador de Painel) -->
-            <section class="bg-white p-6 rounded-lg shadow-md no-print">
-                <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center space-x-2">
-                    <i class="fa-solid fa-clipboard-list text-blue-600"></i>
-                    <span>Painel de Status das Chaves</span>
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="p-4 bg-green-50 border border-green-200 rounded-lg">
-                        <div class="text-green-800 font-bold text-lg">Disponíveis</div>
-                        <div class="text-2xl font-bold text-green-600">18</div>
-                    </div>
-                    <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                        <div class="text-yellow-800 font-bold text-lg">Retiradas</div>
-                        <div class="text-2xl font-bold text-yellow-600">4</div>
-                    </div>
-                    <div class="p-4 bg-red-50 border border-red-200 rounded-lg">
-                        <div class="text-red-800 font-bold text-lg">Manutenção</div>
-                        <div class="text-2xl font-bold text-red-600">1</div>
-                    </div>
-                </div>
-            </section>
-
-        </main>
-
-        <!-- Footer -->
-        <footer class="bg-gray-800 text-white text-center py-4 text-sm no-print">
-            &copy; 2026 EDAG do Brasil - Controle Interno de Instalações e Chaves.
-        </footer>
-    </div>
-
-    <script>
-        // Função para alternar as plantas conforme o botão clicado
-        function mudarPlanta(andar) {
-            const img = document.getElementById('planta-img');
-            const btnTerreo = document.getElementById('btn-terreo');
-            const btnAndar1 = document.getElementById('btn-andar1');
-            const btnAndar2 = document.getElementById('btn-andar2');
-
-            // Remove o destaque de todos os botões
-            [btnTerreo, btnAndar1, btnAndar2].forEach(btn => {
-                btn.className = "px-4 py-2 bg-gray-200 text-gray-700 rounded font-medium text-sm transition hover:bg-gray-300";
-            });
-
-            // Altera a imagem e destaca o botão ativo correspondente
-            if (andar === 'terreo') {
-                img.src = 'img/planta-terreo.png';
-                btnTerreo.className = "px-4 py-2 bg-blue-600 text-white rounded font-medium text-sm transition hover:bg-blue-700";
-            } else if (andar === 'andar1') {
-                img.src = 'img/planta-andar1.png';
-                btnAndar1.className = "px-4 py-2 bg-blue-600 text-white rounded font-medium text-sm transition hover:bg-blue-700";
-            } else if (andar === 'andar2') {
-                img.src = 'img/planta-andar2.png';
-                btnAndar2.className = "px-4 py-2 bg-blue-600 text-white rounded font-medium text-sm transition hover:bg-blue-700";
-            }
-        }
-    </script>
-</body>
-</html>
         function deleteKey(id) {
             if (confirm('Deseja excluir esta chave do claviculário?')) {
                 keysData = keysData.filter(k => k.id !== id);
