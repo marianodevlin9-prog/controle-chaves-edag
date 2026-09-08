@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controle de Chaves | Claviculário EDAG</title>
+    <title>index.html.</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -29,7 +29,6 @@
                 <button onclick="switchMainTab('geral')" id="btn-tab-geral" class="bg-blue-800 hover:bg-blue-700 text-white px-3 py-1.5 rounded text-sm font-medium transition whitespace-nowrap">Claviculário Geral</button>
                 <button onclick="switchMainTab('formularios')" id="btn-tab-forms" class="bg-blue-950 hover:bg-blue-800 text-white px-3 py-1.5 rounded text-sm font-medium transition border border-blue-700 whitespace-nowrap">Formulários (Impressão)</button>
                 <button onclick="switchMainTab('usuarios')" id="btn-tab-users" class="bg-blue-950 hover:bg-blue-800 text-white px-3 py-1.5 rounded text-sm font-medium transition border border-blue-700 whitespace-nowrap">Usuários / Colaboradores</button>
-                <a href="plantas.html" target="_blank" class="bg-blue-950 hover:bg-blue-800 text-white px-3 py-1.5 rounded text-sm font-medium transition border border-blue-700 whitespace-nowrap flex items-center gap-1"><i class="fa-solid fa-map"></i> Plantas Baixas</a>
                 <button onclick="openLogoModal()" class="bg-blue-950 hover:bg-blue-800 text-white px-3 py-1.5 rounded text-sm font-medium transition border border-blue-700 whitespace-nowrap flex items-center gap-1"><i class="fa-solid fa-image"></i> Logo</button>
                 <span class="text-sm bg-blue-800 px-3 py-1 rounded-full border border-blue-700 ml-2 whitespace-nowrap">EDAG do Brasil</span>
             </div>
@@ -109,12 +108,14 @@
                 </div>
             </div>
 
-            <!-- SEÇÃO 2: FORMULÁRIOS INDIVIDUAIS POR CHAVE -->
+            <!-- SEÇÃO 2: FORMULÁRIOS INDIVIDUAIS POR CHAVE (ESTILO IMPRESSÃO) -->
             <div id="section-formularios" class="space-y-6 hidden">
                 <div class="bg-white p-4 rounded-lg shadow flex flex-col md:flex-row justify-between items-center gap-4 no-print">
                     <div class="flex items-center gap-3 w-full md:w-auto">
                         <label class="text-sm font-bold text-gray-700">Selecione a Chave / Porta:</label>
-                        <select id="form-key-select" onchange="loadKeyForm()" class="px-3 py-2 border rounded-lg text-sm w-full md:w-80 focus:ring-2 focus:ring-blue-500 font-semibold"></select>
+                        <select id="form-key-select" onchange="loadKeyForm()" class="px-3 py-2 border rounded-lg text-sm w-full md:w-80 focus:ring-2 focus:ring-blue-500 font-semibold">
+                            <!-- Dinâmico -->
+                        </select>
                     </div>
                     <div class="flex items-center gap-2">
                         <button onclick="openMovementModal()" class="bg-blue-900 hover:bg-blue-800 text-white px-4 py-2 rounded text-sm font-medium transition flex items-center space-x-2">
@@ -129,25 +130,40 @@
                 <!-- O Formulário Impresso -->
                 <div id="printable-form" class="bg-white p-8 rounded-lg shadow border border-gray-300 space-y-6 max-w-4xl mx-auto flex flex-col justify-between min-h-[500px]">
                     <div class="space-y-6">
+                        <!-- Cabeçalho do Formulário com Logo Dinâmico -->
                         <div class="flex justify-between items-center border-b-2 border-black pb-4">
                             <div>
                                 <h2 class="text-2xl font-extrabold tracking-wide uppercase">Controle de Chaves</h2>
                                 <p class="text-xs text-gray-600 mt-1">EDAG do Brasil - Gestão de Facilities</p>
                             </div>
                             <div id="print-logo-container" class="flex items-center justify-end">
-                                <div class="text-right font-bold text-xl tracking-wider border-2 border-black px-4 py-2" id="default-logo-text">EDAG</div>
+                                <div class="text-right font-bold text-xl tracking-wider border-2 border-black px-4 py-2" id="default-logo-text">
+                                    EDAG
+                                </div>
                             </div>
                         </div>
 
+                        <!-- Informações da Chave -->
                         <div class="grid grid-cols-2 gap-4 text-sm pt-2">
-                            <div class="border-b border-gray-400 py-1"><span class="font-bold">PORTA:</span> <span id="print-porta" class="uppercase font-semibold">--</span></div>
-                            <div class="border-b border-gray-400 py-1"><span class="font-bold">LOCALIZAÇÃO NO CLAVICULÁRIO:</span> <span id="print-clav" class="font-semibold">--</span></div>
-                            <div class="border-b border-gray-400 py-1"><span class="font-bold">CLASSIFICAÇÃO DE ZONA DE SEGURANÇA:</span> <span id="print-zona" class="font-semibold">Padrão EDAG</span></div>
-                            <div class="border-b border-gray-400 py-1"><span class="font-bold">QUANTIDADE DE CÓPIAS DE CHAVES:</span> <span id="print-qtd" class="font-semibold">--</span></div>
+                            <div class="border-b border-gray-400 py-1">
+                                <span class="font-bold">PORTA:</span> <span id="print-porta" class="uppercase font-semibold">--</span>
+                            </div>
+                            <div class="border-b border-gray-400 py-1">
+                                <span class="font-bold">LOCALIZAÇÃO NO CLAVICULÁRIO:</span> <span id="print-clav" class="font-semibold">--</span>
+                            </div>
+                            <div class="border-b border-gray-400 py-1">
+                                <span class="font-bold">CLASSIFICAÇÃO DE ZONA DE SEGURANÇA:</span> <span id="print-zona" class="font-semibold">Padrão EDAG</span>
+                            </div>
+                            <div class="border-b border-gray-400 py-1">
+                                <span class="font-bold">QUANTIDADE DE CÓPIAS DE CHAVES:</span> <span id="print-qtd" class="font-semibold">--</span>
+                            </div>
                         </div>
 
-                        <p class="text-xs text-gray-700 italic pt-2">As chaves que não se encontram em posse dos colaboradores conforme registro abaixo, estão no claviculário.</p>
+                        <p class="text-xs text-gray-700 italic pt-2">
+                            As chaves que não se encontram em posse dos colaboradores conforme registro abaixo, estão no claviculário.
+                        </p>
 
+                        <!-- Tabela de Movimentações -->
                         <table class="w-full border-collapse border border-black text-xs">
                             <thead>
                                 <tr class="bg-gray-200 text-center">
@@ -165,12 +181,17 @@
                                     <th class="border border-black p-1.5 text-center w-10 no-print">Ação</th>
                                 </tr>
                             </thead>
-                            <tbody id="print-movements-tbody"></tbody>
+                            <tbody id="print-movements-tbody">
+                                <!-- Dinâmico -->
+                            </tbody>
                         </table>
                     </div>
 
+                    <!-- Rodapé: Assinatura e Data da Conferência Geral -->
                     <div class="border-t-2 border-black pt-4 mt-8 flex flex-col md:flex-row justify-between items-end text-xs font-semibold gap-4">
-                        <div><span>Data da última conferência geral: ______/______/__________</span></div>
+                        <div>
+                            <span>Data da última conferência geral: ______/______/__________</span>
+                        </div>
                         <div class="text-center w-full md:w-72">
                             <div class="border-b border-black pb-1 mb-1">&nbsp;</div>
                             <span>Nome e Assinatura do Responsável (Facility)</span>
@@ -179,7 +200,7 @@
                 </div>
             </div>
 
-            <!-- SEÇÃO 3: GESTÃO DE USUÁRIOS -->
+            <!-- SEÇÃO 3: GESTÃO DE USUÁRIOS / COLABORADORES -->
             <div id="section-usuarios" class="space-y-6 hidden">
                 <div class="bg-white p-4 rounded-lg shadow space-y-4">
                     <div class="flex justify-between items-center">
@@ -195,7 +216,7 @@
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-gray-700 mb-1">Cargo</label>
-                            <input type="text" id="new-user-cargo" placeholder="Ex: Técnico" class="w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-blue-500">
+                            <input type="text" id="new-user-cargo" placeholder="Ex: Técnico de Manutenção" class="w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-blue-500">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-gray-700 mb-1">Departamento</label>
@@ -226,7 +247,9 @@
                                     <th class="py-3 px-4 text-center w-36">Ações</th>
                                 </tr>
                             </thead>
-                            <tbody id="users-table-body" class="divide-y divide-gray-200 text-sm"></tbody>
+                            <tbody id="users-table-body" class="divide-y divide-gray-200 text-sm">
+                                <!-- Dinâmico -->
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -235,72 +258,115 @@
         </main>
     </div>
 
+    <!-- Container Oculto para Impressão do PDF Geral -->
     <div id="printable-general-pdf" class="hidden"></div>
 
-    <!-- Modais -->
+    <!-- Modal: Configurar Logo da Empresa -->
     <div id="logo-modal" class="fixed inset-0 bg-black/50 hidden flex justify-center items-center p-4 z-50">
         <div class="bg-white rounded-lg max-w-md w-full p-6 space-y-4 shadow-xl">
             <h3 class="text-lg font-bold text-gray-800">Inserir Logo da Empresa</h3>
-            <input type="text" id="input-logo-url" class="w-full px-3 py-2 border rounded text-sm" placeholder="https://exemplo.com/logo.png">
+            <p class="text-xs text-gray-500">Cole o link (URL) da imagem do logo da EDAG ou utilize o padrão corporativo.</p>
+            <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">URL da Imagem do Logo</label>
+                <input type="text" id="input-logo-url" class="w-full px-3 py-2 border rounded text-sm focus:ring-2 focus:ring-blue-500" placeholder="https://exemplo.com/logo.png">
+            </div>
             <div class="flex justify-between items-center pt-2">
-                <button onclick="removeCustomLogo()" class="px-3 py-2 bg-red-100 text-red-700 rounded text-xs font-semibold">Restaurar Padrão</button>
+                <button onclick="removeCustomLogo()" class="px-3 py-2 bg-red-100 text-red-700 rounded text-xs font-semibold hover:bg-red-200">Restaurar Padrão EDAG</button>
                 <div class="space-x-2">
-                    <button onclick="closeLogoModal()" class="px-4 py-2 bg-gray-300 rounded text-sm">Cancelar</button>
-                    <button onclick="saveLogoUrl()" class="px-4 py-2 bg-blue-900 text-white rounded text-sm">Salvar</button>
+                    <button onclick="closeLogoModal()" class="px-4 py-2 bg-gray-300 text-gray-700 rounded text-sm font-medium hover:bg-gray-400">Cancelar</button>
+                    <button onclick="saveLogoUrl()" class="px-4 py-2 bg-blue-900 text-white rounded text-sm font-medium hover:bg-blue-800">Salvar Logo</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Modal: Registrar Movimentação -->
     <div id="movement-modal" class="fixed inset-0 bg-black/50 hidden flex justify-center items-center p-4 z-50">
         <div class="bg-white rounded-lg max-w-lg w-full p-6 space-y-4 shadow-xl">
-            <h3 class="text-lg font-bold text-gray-800">Registrar Movimentação</h3>
+            <h3 class="text-lg font-bold text-gray-800">Registrar Movimentação de Chave</h3>
             <p id="mov-modal-key-info" class="text-sm text-gray-600 font-semibold"></p>
+            
             <div>
-                <label class="block text-xs font-semibold text-gray-700 mb-1">Ação</label>
-                <select id="mov-type" onchange="toggleDevolucaoFields()" class="w-full px-3 py-2 border rounded text-sm">
-                    <option value="retirada">Nova Retirada</option>
-                    <option value="devolucao">Registrar Devolução</option>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Tipo de Ação</label>
+                <select id="mov-type" onchange="toggleDevolucaoFields()" class="w-full px-3 py-2 border rounded text-sm focus:ring-2 focus:ring-blue-500">
+                    <option value="retirada">Nova Retirada (Empréstimo)</option>
+                    <option value="devolucao">Registrar Devolução de Chave Pendente</option>
                 </select>
             </div>
+
             <div>
-                <label class="block text-xs font-semibold text-gray-700 mb-1">Colaborador</label>
-                <select id="mov-collab-select" onchange="fillCollabDetails()" class="w-full px-3 py-2 border rounded text-sm font-medium"></select>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Colaborador / Solicitante</label>
+                <select id="mov-collab-select" onchange="fillCollabDetails()" class="w-full px-3 py-2 border rounded text-sm focus:ring-2 focus:ring-blue-500 font-medium"></select>
             </div>
+
             <div class="grid grid-cols-3 gap-2">
-                <input type="text" id="mov-cargo" class="px-2 py-1 border rounded text-xs bg-gray-50" readonly>
-                <input type="text" id="mov-dept" class="px-2 py-1 border rounded text-xs bg-gray-50" readonly>
-                <input type="text" id="mov-chefe" class="px-2 py-1 border rounded text-xs bg-gray-50" readonly>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Cargo</label>
+                    <input type="text" id="mov-cargo" class="w-full px-3 py-2 border rounded text-sm bg-gray-50 text-gray-600" readonly>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Departamento</label>
+                    <input type="text" id="mov-dept" class="w-full px-3 py-2 border rounded text-sm bg-gray-50 text-gray-600" readonly>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Chefe / Gestor</label>
+                    <input type="text" id="mov-chefe" class="w-full px-3 py-2 border rounded text-sm bg-gray-50 text-gray-600" readonly>
+                </div>
             </div>
+
             <div class="grid grid-cols-2 gap-3">
-                <input type="date" id="mov-date-delivery" class="px-3 py-2 border rounded text-sm">
-                <input type="date" id="mov-date-return" class="px-3 py-2 border rounded text-sm hidden">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Data da Entrega</label>
+                    <input type="date" id="mov-date-delivery" class="w-full px-3 py-2 border rounded text-sm focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div id="div-date-return" class="hidden">
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Data da Devolução</label>
+                    <input type="date" id="mov-date-return" class="w-full px-3 py-2 border rounded text-sm focus:ring-2 focus:ring-blue-500">
+                </div>
             </div>
-            <input type="text" id="mov-obs" class="w-full px-3 py-2 border rounded text-sm hidden" placeholder="Motivo da devolução...">
+
+            <div id="div-obs" class="hidden">
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Motivo / Observação da Devolução</label>
+                <input type="text" id="mov-obs" class="w-full px-3 py-2 border rounded text-sm focus:ring-2 focus:ring-blue-500" placeholder="Ex: Fim do projeto, substituição...">
+            </div>
+
             <div class="flex justify-end space-x-2 pt-2">
-                <button onclick="closeMovementModal()" class="px-4 py-2 bg-gray-300 rounded text-sm">Cancelar</button>
-                <button onclick="saveMovement()" class="px-4 py-2 bg-blue-900 text-white rounded text-sm">Salvar</button>
+                <button onclick="closeMovementModal()" class="px-4 py-2 bg-gray-300 text-gray-700 rounded text-sm font-medium hover:bg-gray-400">Cancelar</button>
+                <button onclick="saveMovement()" class="px-4 py-2 bg-blue-900 text-white rounded text-sm font-medium hover:bg-blue-800">Salvar Registro</button>
             </div>
         </div>
     </div>
 
+    <!-- Modal: Cadastro / Edição de Chave Geral -->
     <div id="key-modal" class="fixed inset-0 bg-black/50 hidden flex justify-center items-center p-4 z-50">
         <div class="bg-white rounded-lg max-w-md w-full p-6 space-y-4 shadow-xl">
-            <h3 id="key-modal-title" class="text-lg font-bold text-gray-800">Nova Chave</h3>
+            <h3 id="key-modal-title" class="text-lg font-bold text-gray-800">Cadastrar Nova Chave</h3>
             <input type="hidden" id="edit-key-id" value="">
-            <input type="number" id="input-nr" class="w-full px-3 py-2 border rounded text-sm" placeholder="Número NR">
-            <select id="input-local" class="w-full px-3 py-2 border rounded text-sm">
-                <option value="2º ANDAR">2º ANDAR</option>
-                <option value="1º ANDAR">1º ANDAR</option>
-                <option value="TÉRREO">TÉRREO</option>
-                <option value="SUBSOLO">SUBSOLO</option>
-                <option value="FACILITY">FACILITY</option>
-            </select>
-            <input type="text" id="input-porta" class="w-full px-3 py-2 border rounded text-sm" placeholder="Nome da Porta">
-            <input type="number" id="input-qtd" class="w-full px-3 py-2 border rounded text-sm" value="1" min="1">
+            <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Número no Claviculário (NR)</label>
+                <input type="number" id="input-nr" class="w-full px-3 py-2 border rounded text-sm focus:ring-2 focus:ring-blue-500" placeholder="Ex: 10">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Área / Local</label>
+                <select id="input-local" class="w-full px-3 py-2 border rounded text-sm focus:ring-2 focus:ring-blue-500">
+                    <option value="2º ANDAR">2º ANDAR</option>
+                    <option value="1º ANDAR">1º ANDAR</option>
+                    <option value="TÉRREO">TÉRREO</option>
+                    <option value="SUBSOLO">SUBSOLO</option>
+                    <option value="FACILITY">FACILITY</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Nome da Porta</label>
+                <input type="text" id="input-porta" class="w-full px-3 py-2 border rounded text-sm focus:ring-2 focus:ring-blue-500" placeholder="Ex: SALA DE REUNIÃO">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Quantidade de Cópias</label>
+                <input type="number" id="input-qtd" class="w-full px-3 py-2 border rounded text-sm focus:ring-2 focus:ring-blue-500" value="1" min="1">
+            </div>
             <div class="flex justify-end space-x-2 pt-2">
-                <button onclick="closeKeyModal()" class="px-4 py-2 bg-gray-300 rounded text-sm">Cancelar</button>
-                <button onclick="saveKeyData()" class="px-4 py-2 bg-green-700 text-white rounded text-sm">Salvar</button>
+                <button onclick="closeKeyModal()" class="px-4 py-2 bg-gray-300 text-gray-700 rounded text-sm font-medium hover:bg-gray-400">Cancelar</button>
+                <button onclick="saveKeyData()" class="px-4 py-2 bg-green-700 text-white rounded text-sm font-medium hover:bg-green-600">Salvar Chave</button>
             </div>
         </div>
     </div>
@@ -341,6 +407,7 @@
             { nome: "Ana Paula Souza", cargo: "Engenheira de Projetos", dept: "Engenharia", chefe: "Diretoria" }
         ];
         let companyLogoUrl = localStorage.getItem('edag_logo_url') || '';
+        
         let currentFilterLocal = 'GERAL';
         let activeKeyIdForForm = keysData[0] ? keysData[0].id : null;
 
@@ -390,6 +457,7 @@
         function renderGeralTable() {
             const tbody = document.getElementById('geral-table-body');
             tbody.innerHTML = '';
+
             let totalPositions = keysData.length;
             let totalAvailable = 0;
             let totalBorrowed = 0;
@@ -406,12 +474,18 @@
 
             const query = document.getElementById('search-input').value.toLowerCase();
             let filtered = keysData;
+
             if (currentFilterLocal !== 'GERAL') {
                 filtered = filtered.filter(item => item.local.toUpperCase().includes(currentFilterLocal));
             }
+
             if (query) {
-                filtered = filtered.filter(item => item.porta.toLowerCase().includes(query) || item.nr.toString().includes(query));
+                filtered = filtered.filter(item => 
+                    item.porta.toLowerCase().includes(query) || 
+                    item.nr.toString().includes(query)
+                );
             }
+
             filtered.sort((a, b) => a.nr - b.nr);
 
             if (filtered.length === 0) {
@@ -445,6 +519,7 @@
 
         function generateGeneralPDF() {
             const container = document.getElementById('printable-general-pdf');
+            
             let filtered = keysData;
             if (currentFilterLocal !== 'GERAL') {
                 filtered = filtered.filter(item => item.local.toUpperCase().includes(currentFilterLocal));
@@ -456,15 +531,67 @@
                 const activeMovs = item.movements.filter(m => !m.dataDevolucao);
                 const qtyInUse = activeMovs.length;
                 const qtyInClav = Math.max(0, item.qtd - qtyInUse);
-                rowsHtml += `<tr style="border-bottom: 1px solid #ccc;"><td style="padding: 8px; font-weight: bold;">#${item.nr}</td><td style="padding: 8px;">${item.local}</td><td style="padding: 8px; font-weight: 600;">${item.porta}</td><td style="padding: 8px; text-align: center; font-weight: bold;">${item.qtd}</td><td style="padding: 8px; text-align: center;">${qtyInUse}</td><td style="padding: 8px; text-align: center;">${qtyInClav}</td></tr>`;
+
+                rowsHtml += `
+                    <tr style="border-bottom: 1px solid #ccc;">
+                        <td style="padding: 8px; font-weight: bold;">#${item.nr}</td>
+                        <td style="padding: 8px;">${item.local}</td>
+                        <td style="padding: 8px; font-weight: 600;">${item.porta}</td>
+                        <td style="padding: 8px; text-align: center; font-weight: bold;">${item.qtd}</td>
+                        <td style="padding: 8px; text-align: center;">${qtyInUse}</td>
+                        <td style="padding: 8px; text-align: center;">${qtyInClav}</td>
+                    </tr>
+                `;
             });
 
             let logoHtml = `<div style="font-weight: bold; font-size: 16px; border: 2px solid #000; padding: 6px 12px;">EDAG</div>`;
             if (companyLogoUrl && companyLogoUrl.trim() !== '') {
-                logoHtml = `<img src="${companyLogoUrl}" alt="Logo" style="height: 40px; object-fit: contain;">`;
+                logoHtml = `<img src="${companyLogoUrl}" alt="Logo Empresa" style="height: 40px; object-fit: contain;">`;
             }
 
-            container.innerHTML = `<div style="padding: 20px; font-family: Arial, sans-serif; color: #111;"><div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #000; padding-bottom: 12px; margin-bottom: 20px;"><div><h2 style="font-size: 20px; font-weight: bold; margin: 0; text-transform: uppercase;">Relatório Geral do Claviculário</h2><p style="font-size: 11px; color: #555; margin: 4px 0 0 0;">EDAG do Brasil - Filtro: ${currentFilterLocal}</p></div><div>${logoHtml}</div></div><table style="width: 100%; border-collapse: collapse; font-size: 11px;"><thead><tr style="background-color: #e5e7eb; text-align: left; text-transform: uppercase;"><th style="padding: 8px; border: 1px solid #999;">Clav. / NR</th><th style="padding: 8px; border: 1px solid #999;">Local</th><th style="padding: 8px; border: 1px solid #999;">Porta</th><th style="padding: 8px; border: 1px solid #999; text-align: center;">Total</th><th style="padding: 8px; border: 1px solid #999; text-align: center;">Em Uso</th><th style="padding: 8px; border: 1px solid #999; text-align: center;">Estoque</th></tr></thead><tbody>${rowsHtml}</tbody></table></div>`;
+            container.innerHTML = `
+                <div style="padding: 20px; font-family: Arial, sans-serif; color: #111; display: flex; flex-direction: column; justify-content: space-between; min-height: 95vh;">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #000; padding-bottom: 12px; margin-bottom: 20px;">
+                            <div>
+                                <h2 style="font-size: 20px; font-weight: bold; margin: 0; text-transform: uppercase;">Relatório Geral do Claviculário</h2>
+                                <p style="font-size: 11px; color: #555; margin: 4px 0 0 0;">EDAG do Brasil - Gestão de Facilities | Filtro: ${currentFilterLocal}</p>
+                            </div>
+                            <div>
+                                ${logoHtml}
+                            </div>
+                        </div>
+                        
+                        <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+                            <thead>
+                                <tr style="background-color: #e5e7eb; text-align: left; text-transform: uppercase; font-size: 10px;">
+                                    <th style="padding: 8px; border: 1px solid #999;">Clav. / NR</th>
+                                    <th style="padding: 8px; border: 1px solid #999;">Área / Local</th>
+                                    <th style="padding: 8px; border: 1px solid #999;">Nome da Porta</th>
+                                    <th style="padding: 8px; border: 1px solid #999; text-align: center;">Total</th>
+                                    <th style="padding: 8px; border: 1px solid #999; text-align: center;">Em Uso</th>
+                                    <th style="padding: 8px; border: 1px solid #999; text-align: center;">Estoque Claviculário</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${rowsHtml}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Rodapé de Conferência e Assinatura no PDF Geral -->
+                    <div style="border-top: 2px solid #000; padding-top: 15px; margin-top: 40px; display: flex; justify-content: space-between; align-items: flex-end; font-size: 11px; font-weight: bold;">
+                        <div>
+                            <span>Data da última conferência geral: ______/______/__________</span>
+                        </div>
+                        <div style="text-align: center; width: 260px;">
+                            <div style="border-bottom: 1px solid #000; padding-bottom: 4px; margin-bottom: 4px;">&nbsp;</div>
+                            <span>Nome e Assinatura do Responsável (Facility)</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
             container.classList.remove('hidden');
             window.print();
             container.classList.add('hidden');
@@ -502,15 +629,16 @@
 
             const logoContainer = document.getElementById('print-logo-container');
             if (companyLogoUrl && companyLogoUrl.trim() !== '') {
-                logoContainer.innerHTML = `<img src="${companyLogoUrl}" alt="Logo" class="h-12 object-contain">`;
+                logoContainer.innerHTML = `<img src="${companyLogoUrl}" alt="Logo Empresa" class="h-12 object-contain">`;
             } else {
                 logoContainer.innerHTML = `<div class="text-right font-bold text-xl tracking-wider border-2 border-black px-4 py-2">EDAG</div>`;
             }
 
             const tbody = document.getElementById('print-movements-tbody');
             tbody.innerHTML = '';
+
             if (!item.movements || item.movements.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="8" class="py-4 text-center text-gray-500 italic">Nenhum registro encontrado.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="8" class="py-4 text-center text-gray-500 italic">Nenhum registro de entrega ou devolução cadastrado para esta chave.</td></tr>`;
                 return;
             }
 
@@ -518,14 +646,19 @@
                 const tr = document.createElement('tr');
                 tr.className = "border-b border-black";
                 tr.innerHTML = `
-                    <td class="border border-black p-1.5 font-medium">${mov.colaborador}<div class="text-[10px] text-gray-500">Gestor: ${mov.chefe || '--'}</div></td>
-                    <td class="border border-black p-1.5 text-xs">${mov.cargo || '--'} / ${mov.dept || '--'}</td>
+                    <td class="border border-black p-1.5 font-medium">
+                        ${mov.colaborador}
+                        <div class="text-[10px] text-gray-500 font-normal">Gestor: ${mov.chefe || '--'}</div>
+                    </td>
+                    <td class="border border-black p-1.5 text-xs text-gray-700">${mov.cargo || '--'} / ${mov.dept || '--'}</td>
                     <td class="border border-black p-1.5 text-center text-gray-400">---</td>
                     <td class="border border-black p-1.5 text-center">${mov.dataEntrega || ''}</td>
                     <td class="border border-black p-1.5 text-center font-semibold text-blue-900">${mov.dataDevolucao || '<span class="text-amber-600 italic">Em uso</span>'}</td>
                     <td class="border border-black p-1.5 text-center text-gray-400">---</td>
                     <td class="border border-black p-1.5">${mov.observacao || ''}</td>
-                    <td class="border border-black p-1.5 text-center no-print"><button onclick="deleteMovement(${item.id}, ${index})" class="text-red-600 font-bold">X</button></td>
+                    <td class="border border-black p-1.5 text-center no-print">
+                        <button onclick="deleteMovement(${item.id}, ${index})" class="text-red-600 hover:text-red-800 font-bold" title="Remover registro">X</button>
+                    </td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -553,72 +686,129 @@
                 document.getElementById('mov-cargo').value = selectedOpt.getAttribute('data-cargo');
                 document.getElementById('mov-dept').value = selectedOpt.getAttribute('data-dept');
                 document.getElementById('mov-chefe').value = selectedOpt.getAttribute('data-chefe');
+            } else {
+                document.getElementById('mov-cargo').value = '';
+                document.getElementById('mov-dept').value = '';
+                document.getElementById('mov-chefe').value = '';
             }
         }
 
         function openMovementModal() {
             populateCollabSelect();
             document.getElementById('mov-date-delivery').value = new Date().toISOString().split('T')[0];
+            document.getElementById('mov-date-return').value = '';
+            document.getElementById('mov-obs').value = '';
+            document.getElementById('mov-type').value = 'retirada';
+            toggleDevolucaoFields();
+            
+            const item = keysData.find(k => k.id === activeKeyIdForForm);
+            document.getElementById('mov-modal-key-info').innerText = `Chave: #${item.nr} - ${item.porta}`;
             document.getElementById('movement-modal').classList.remove('hidden');
         }
 
-        function closeMovementModal() { document.getElementById('movement-modal').classList.add('hidden'); }
+        function closeMovementModal() {
+            document.getElementById('movement-modal').classList.add('hidden');
+        }
 
         function toggleDevolucaoFields() {
             const type = document.getElementById('mov-type').value;
             if (type === 'devolucao') {
-                document.getElementById('mov-date-return').classList.remove('hidden');
-                document.getElementById('mov-obs').classList.remove('hidden');
+                document.getElementById('div-date-return').classList.remove('hidden');
+                document.getElementById('div-obs').classList.remove('hidden');
                 document.getElementById('mov-date-return').value = new Date().toISOString().split('T')[0];
             } else {
-                document.getElementById('mov-date-return').classList.add('hidden');
-                document.getElementById('mov-obs').classList.add('hidden');
+                document.getElementById('div-date-return').classList.add('hidden');
+                document.getElementById('div-obs').classList.add('hidden');
             }
         }
 
         function saveMovement() {
-            const collabName = document.getElementById('mov-collab-select').value;
-            if (!collabName) return alert('Selecione um colaborador.');
+            const select = document.getElementById('mov-collab-select');
+            const collabName = select.value;
+            if (!collabName) {
+                alert('Selecione um colaborador.');
+                return;
+            }
+            
+            const cargo = document.getElementById('mov-cargo').value;
+            const dept = document.getElementById('mov-dept').value;
+            const chefe = document.getElementById('mov-chefe').value;
+
+            const type = document.getElementById('mov-type').value;
+            const dateDelivery = document.getElementById('mov-date-delivery').value;
+            const dateReturn = document.getElementById('mov-date-return').value;
+            const obs = document.getElementById('mov-obs').value.trim();
+
             const item = keysData.find(k => k.id === activeKeyIdForForm);
-            item.movements.push({
-                colaborador: collabName,
-                cargo: document.getElementById('mov-cargo').value,
-                dept: document.getElementById('mov-dept').value,
-                chefe: document.getElementById('mov-chefe').value,
-                dataEntrega: document.getElementById('mov-date-delivery').value,
-                dataDevolucao: document.getElementById('mov-type').value === 'devolucao' ? document.getElementById('mov-date-return').value : '',
-                observacao: document.getElementById('mov-type').value === 'devolucao' ? document.getElementById('mov-obs').value : ''
-            });
+            if (type === 'retirada') {
+                item.movements.push({
+                    colaborador: collabName,
+                    cargo: cargo,
+                    dept: dept,
+                    chefe: chefe,
+                    dataEntrega: dateDelivery,
+                    dataDevolucao: '',
+                    observacao: ''
+                });
+            } else {
+                item.movements.push({
+                    colaborador: collabName,
+                    cargo: cargo,
+                    dept: dept,
+                    chefe: chefe,
+                    dataEntrega: dateDelivery,
+                    dataDevolucao: dateReturn,
+                    observacao: obs
+                });
+            }
+
             saveData();
             closeMovementModal();
             loadKeyForm();
         }
 
         function deleteMovement(keyId, movIndex) {
-            if (confirm('Deseja excluir este registro?')) {
-                keysData.find(k => k.id === keyId).movements.splice(movIndex, 1);
+            if (confirm('Deseja excluir este registro do formulário?')) {
+                const item = keysData.find(k => k.id === keyId);
+                item.movements.splice(movIndex, 1);
                 saveData();
                 loadKeyForm();
             }
         }
 
+        // Gestão de Usuários
         function renderUsersTable() {
             const tbody = document.getElementById('users-table-body');
             tbody.innerHTML = '';
+
+            if (collaboratorsList.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="py-6 text-center text-gray-500">Nenhum colaborador cadastrado.</td></tr>`;
+                return;
+            }
+
             collaboratorsList.sort((a, b) => a.nome.localeCompare(b.nome)).forEach((c, index) => {
                 let activeCount = 0;
-                keysData.forEach(k => k.movements.forEach(m => { if (m.colaborador === c.nome && !m.dataDevolucao) activeCount++; }));
+                keysData.forEach(k => {
+                    k.movements.forEach(m => {
+                        if (m.colaborador === c.nome && !m.dataDevolucao) activeCount++;
+                    });
+                });
+
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-gray-50 transition";
                 tr.innerHTML = `
-                    <td class="py-3 px-4 font-semibold">${c.nome}</td>
+                    <td class="py-3 px-4 font-semibold text-gray-800">${c.nome}</td>
                     <td class="py-3 px-4 text-gray-600">${c.cargo || '--'}</td>
                     <td class="py-3 px-4 text-gray-600">${c.dept || '--'}</td>
-                    <td class="py-3 px-4 text-gray-600">${c.chefe || '--'}</td>
-                    <td class="py-3 px-4 text-center"><span class="px-2 py-1 rounded text-xs font-bold ${activeCount > 0 ? 'bg-amber-100 text-amber-800' : 'bg-gray-100'}">${activeCount} em uso</span></td>
+                    <td class="py-3 px-4 text-gray-600 font-medium">${c.chefe || '--'}</td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="px-2.5 py-1 rounded-full text-xs font-bold ${activeCount > 0 ? 'bg-amber-100 text-amber-800' : 'bg-gray-100 text-gray-600'}">
+                            ${activeCount} em uso
+                        </span>
+                    </td>
                     <td class="py-3 px-4 text-center space-x-2">
-                        <button onclick="editUser(${index})" class="px-2 py-1 bg-gray-600 text-white rounded text-xs"><i class="fa-solid fa-pen"></i></button>
-                        <button onclick="deleteUser(${index})" class="px-2 py-1 bg-red-600 text-white rounded text-xs"><i class="fa-solid fa-trash"></i></button>
+                        <button onclick="editUser(${index})" class="px-2.5 py-1 bg-gray-600 text-white rounded text-xs font-medium hover:bg-gray-700 transition" title="Editar"><i class="fa-solid fa-pen"></i></button>
+                        <button onclick="deleteUser(${index})" class="px-2.5 py-1 bg-red-600 text-white rounded text-xs font-medium hover:bg-red-700 transition" title="Excluir"><i class="fa-solid fa-trash"></i></button>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -627,42 +817,107 @@
 
         function addNewUser() {
             const name = document.getElementById('new-user-name').value.trim();
-            if (!name) return alert('Digite o nome.');
-            collaboratorsList.push({
-                nome: name,
-                cargo: document.getElementById('new-user-cargo').value.trim(),
-                dept: document.getElementById('new-user-dept').value.trim(),
-                chefe: document.getElementById('new-user-chefe').value.trim()
-            });
-            ['new-user-name', 'new-user-cargo', 'new-user-dept', 'new-user-chefe'].forEach(id => document.getElementById(id).value = '');
+            const cargo = document.getElementById('new-user-cargo').value.trim();
+            const dept = document.getElementById('new-user-dept').value.trim();
+            const chefe = document.getElementById('new-user-chefe').value.trim();
+
+            if (!name) {
+                alert('Digite o nome do colaborador.');
+                return;
+            }
+
+            if (collaboratorsList.some(c => c.nome.toLowerCase() === name.toLowerCase())) {
+                alert('Este colaborador já está cadastrado.');
+                return;
+            }
+
+            collaboratorsList.push({ nome: name, cargo: cargo, dept: dept, chefe: chefe });
+            document.getElementById('new-user-name').value = '';
+            document.getElementById('new-user-cargo').value = '';
+            document.getElementById('new-user-dept').value = '';
+            document.getElementById('new-user-chefe').value = '';
+
             saveData();
             renderUsersTable();
         }
 
         function editUser(index) {
             const c = collaboratorsList[index];
-            const newName = prompt('Novo Nome:', c.nome);
-            if (newName) {
-                c.nome = newName.trim();
+            const newName = prompt('Editar Nome:', c.nome);
+            if (newName === null) return;
+            const newCargo = prompt('Editar Cargo:', c.cargo || '');
+            if (newCargo === null) return;
+            const newDept = prompt('Editar Departamento:', c.dept || '');
+            if (newDept === null) return;
+            const newChefe = prompt('Editar Chefe / Gestor Direto:', c.chefe || '');
+            if (newChefe === null) return;
+
+            const trimmedName = newName.trim();
+            if (trimmedName !== '') {
+                const oldName = c.nome;
+                collaboratorsList[index] = { nome: trimmedName, cargo: newCargo.trim(), dept: newDept.trim(), chefe: newChefe.trim() };
+
+                keysData.forEach(k => {
+                    k.movements.forEach(m => {
+                        if (m.colaborador === oldName) {
+                            m.colaborador = trimmedName;
+                            m.cargo = newCargo.trim();
+                            m.dept = newDept.trim();
+                            m.chefe = newChefe.trim();
+                        }
+                    });
+                });
+
                 saveData();
                 renderUsersTable();
             }
         }
 
         function deleteUser(index) {
-            if (confirm('Excluir colaborador?')) {
+            const c = collaboratorsList[index];
+            if (confirm(`Deseja realmente excluir o colaborador "${c.nome}"?`)) {
                 collaboratorsList.splice(index, 1);
                 saveData();
                 renderUsersTable();
             }
         }
 
-        function openLogoModal() { document.getElementById('input-logo-url').value = companyLogoUrl; document.getElementById('logo-modal').classList.remove('hidden'); }
-        function closeLogoModal() { document.getElementById('logo-modal').classList.add('hidden'); }
-        function saveLogoUrl() { companyLogoUrl = document.getElementById('input-logo-url').value.trim(); saveData(); closeLogoModal(); loadKeyForm(); }
-        function removeCustomLogo() { companyLogoUrl = ''; saveData(); closeLogoModal(); loadKeyForm(); }
+        // Configuração do Logo
+        function openLogoModal() {
+            document.getElementById('input-logo-url').value = companyLogoUrl;
+            document.getElementById('logo-modal').classList.remove('hidden');
+        }
 
-        function openKeyModal() { document.getElementById('key-modal-title').innerText = 'Nova Chave'; document.getElementById('edit-key-id').value = ''; ['input-nr', 'input-porta'].forEach(id => document.getElementById(id).value = ''); document.getElementById('key-modal').classList.remove('hidden'); }
+        function closeLogoModal() {
+            document.getElementById('logo-modal').classList.add('hidden');
+        }
+
+        function saveLogoUrl() {
+            const url = document.getElementById('input-logo-url').value.trim();
+            companyLogoUrl = url;
+            saveData();
+            closeLogoModal();
+            loadKeyForm();
+        }
+
+        function removeCustomLogo() {
+            companyLogoUrl = '';
+            saveData();
+            closeLogoModal();
+            loadKeyForm();
+        }
+
+        // CRUD Chaves
+        function openKeyModal() {
+            document.getElementById('key-modal-title').innerText = 'Cadastrar Nova Chave';
+            document.getElementById('edit-key-id').value = '';
+            document.getElementById('input-nr').value = '';
+            document.getElementById('input-local').value = '2º ANDAR';
+            document.getElementById('input-porta').value = '';
+            document.getElementById('input-qtd').value = '1';
+            document.getElementById('key-modal').classList.remove('hidden');
+        }
+
         function openEditKeyModal(id) {
             const item = keysData.find(k => k.id === id);
             document.getElementById('key-modal-title').innerText = 'Editar Chave';
@@ -673,39 +928,161 @@
             document.getElementById('input-qtd').value = item.qtd;
             document.getElementById('key-modal').classList.remove('hidden');
         }
-        function closeKeyModal() { document.getElementById('key-modal').classList.add('hidden'); }
+
+        function closeKeyModal() {
+            document.getElementById('key-modal').classList.add('hidden');
+        }
 
         function saveKeyData() {
             const editId = document.getElementById('edit-key-id').value;
             const nr = parseInt(document.getElementById('input-nr').value);
+            const local = document.getElementById('input-local').value;
             const porta = document.getElementById('input-porta').value.trim();
             const qtd = parseInt(document.getElementById('input-qtd').value);
-            if (!nr || !porta) return alert('Preencha os campos obrigatórios.');
+
+            if (!nr || !porta || !qtd) {
+                alert('Preencha todos os campos.');
+                return;
+            }
 
             if (editId === '') {
                 const newId = keysData.length > 0 ? Math.max(...keysData.map(k => k.id)) + 1 : 1;
-                keysData.push({ id: newId, nr, local: document.getElementById('input-local').value, porta, qtd, movements: [] });
+                keysData.push({ id: newId, nr, local, porta, qtd, movements: [] });
             } else {
                 const item = keysData.find(k => k.id === parseInt(editId));
                 item.nr = nr;
-                item.local = document.getElementById('input-local').value;
+                item.local = local;
                 item.porta = porta;
                 item.qtd = qtd;
             }
+
             saveData();
             closeKeyModal();
             renderGeralTable();
         }
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Chaves - EDAG</title>
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/browser.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @media print {
+            body * { visibility: hidden; }
+            #printable-form, #printable-form *, #printable-general-pdf, #printable-general-pdf * { visibility: visible; }
+            #printable-form { position: absolute; left: 0; top: 0; width: 100%; box-shadow: none !important; border: none !important; }
+            #printable-general-pdf { position: absolute; left: 0; top: 0; width: 100%; box-shadow: none !important; border: none !important; background: white !important; }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-900">
 
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-blue-900 text-white shadow-md py-4 px-6 flex justify-between items-center no-print">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-key text-2xl text-yellow-400"></i>
+                <h1 class="text-xl font-bold">Controle de Chaves | Claviculário & Plantas</h1>
+            </div>
+            <div class="text-sm">EDAG do Brasil - Facility Management</div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow p-6 max-w-7xl mx-auto w-full space-y-6">
+            
+            <!-- Seção de Plantas Baixas -->
+            <section class="bg-white p-6 rounded-lg shadow-md no-print">
+                <h2 class="text-lg font-bold text-gray-800 mb-2 flex items-center space-x-2">
+                    <i class="fa-solid fa-map text-blue-600"></i>
+                    <span>Plantas Baixas e Localização de Portas</span>
+                </h2>
+                <p class="text-sm text-gray-600 mb-4">Selecione o andar para visualizar a planta correspondente com as portas numeradas:</p>
+                
+                <!-- Botões de Navegação dos Andares -->
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <button onclick="mudarPlanta('terreo')" id="btn-terreo" class="px-4 py-2 bg-blue-600 text-white rounded font-medium text-sm transition hover:bg-blue-700">Térreo</button>
+                    <button onclick="mudarPlanta('andar1')" id="btn-andar1" class="px-4 py-2 bg-gray-200 text-gray-700 rounded font-medium text-sm transition hover:bg-gray-300">1º Andar</button>
+                    <button onclick="mudarPlanta('andar2')" id="btn-andar2" class="px-4 py-2 bg-gray-200 text-gray-700 rounded font-medium text-sm transition hover:bg-gray-300">2º Andar</button>
+                </div>
+
+                <!-- Container da Imagem da Planta -->
+                <div class="border rounded-lg p-2 bg-gray-50 flex justify-center items-center overflow-x-auto">
+                    <img id="planta-img" src="img/planta-terreo.png" alt="Planta Baixa" class="max-h-[500px] object-contain rounded border shadow-sm">
+                </div>
+            </section>
+
+            <!-- Seção de Controle de Chaves (Simulador de Painel) -->
+            <section class="bg-white p-6 rounded-lg shadow-md no-print">
+                <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center space-x-2">
+                    <i class="fa-solid fa-clipboard-list text-blue-600"></i>
+                    <span>Painel de Status das Chaves</span>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-4 bg-green-50 border border-green-200 rounded-lg">
+                        <div class="text-green-800 font-bold text-lg">Disponíveis</div>
+                        <div class="text-2xl font-bold text-green-600">18</div>
+                    </div>
+                    <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                        <div class="text-yellow-800 font-bold text-lg">Retiradas</div>
+                        <div class="text-2xl font-bold text-yellow-600">4</div>
+                    </div>
+                    <div class="p-4 bg-red-50 border border-red-200 rounded-lg">
+                        <div class="text-red-800 font-bold text-lg">Manutenção</div>
+                        <div class="text-2xl font-bold text-red-600">1</div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white text-center py-4 text-sm no-print">
+            &copy; 2026 EDAG do Brasil - Controle Interno de Instalações e Chaves.
+        </footer>
+    </div>
+
+    <script>
+        // Função para alternar as plantas conforme o botão clicado
+        function mudarPlanta(andar) {
+            const img = document.getElementById('planta-img');
+            const btnTerreo = document.getElementById('btn-terreo');
+            const btnAndar1 = document.getElementById('btn-andar1');
+            const btnAndar2 = document.getElementById('btn-andar2');
+
+            // Remove o destaque de todos os botões
+            [btnTerreo, btnAndar1, btnAndar2].forEach(btn => {
+                btn.className = "px-4 py-2 bg-gray-200 text-gray-700 rounded font-medium text-sm transition hover:bg-gray-300";
+            });
+
+            // Altera a imagem e destaca o botão ativo correspondente
+            if (andar === 'terreo') {
+                img.src = 'img/planta-terreo.png';
+                btnTerreo.className = "px-4 py-2 bg-blue-600 text-white rounded font-medium text-sm transition hover:bg-blue-700";
+            } else if (andar === 'andar1') {
+                img.src = 'img/planta-andar1.png';
+                btnAndar1.className = "px-4 py-2 bg-blue-600 text-white rounded font-medium text-sm transition hover:bg-blue-700";
+            } else if (andar === 'andar2') {
+                img.src = 'img/planta-andar2.png';
+                btnAndar2.className = "px-4 py-2 bg-blue-600 text-white rounded font-medium text-sm transition hover:bg-blue-700";
+            }
+        }
+    </script>
+</body>
+</html>
         function deleteKey(id) {
-            if (confirm('Deseja excluir esta chave?')) {
+            if (confirm('Deseja excluir esta chave do claviculário?')) {
                 keysData = keysData.filter(k => k.id !== id);
                 saveData();
                 renderGeralTable();
             }
         }
 
-        window.onload = () => { renderGeralTable(); };
+        window.onload = () => {
+            renderGeralTable();
+        };
     </script>
 </body>
 </html>
